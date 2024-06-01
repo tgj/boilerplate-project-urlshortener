@@ -32,7 +32,7 @@ exports.shortLink_create_post = asyncHandler(async (req, res, next) => {
 exports.shortLink_get = asyncHandler(async (req, res, next) => {
   const validationErrors = validationResult(req);
   if (!validationErrors.isEmpty()) {
-    return res.status(422).json({ error: "invalid id" });
+    return res.json({ error: "invalid id" });
   }
 
   id = Number(req.params.numberId);
