@@ -45,6 +45,12 @@ app.get(
   shortLinkController.shortLink_get
 );
 
+app.get("/health", (_, res) => {
+  res.json({
+    status: "ok",
+  });
+});
+
 app.listen(port, function () {
   console.log(`Listening on port ${port}`);
 });
