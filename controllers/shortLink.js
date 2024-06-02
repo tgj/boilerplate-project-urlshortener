@@ -42,6 +42,6 @@ exports.shortLink_get = asyncHandler(async (req, res, next) => {
       res.redirect(doc.originalLink);
     })
     .catch((err) => {
-      res.status(422).json({ error: `shortlink with id: ${id} not found` });
+      res.json({ error: `shortlink with id: ${id} not found` });
     });
 });
