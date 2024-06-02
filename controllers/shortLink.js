@@ -10,7 +10,7 @@ mongoose.connect(process.env.MONGO_URI);
 exports.shortLink_create_post = asyncHandler(async (req, res, next) => {
   const validationErrors = validationResult(req);
   if (!validationErrors.isEmpty()) {
-    return res.status(422).json({ error: "invalid url" });
+    return res.json({ error: "invalid url" });
   }
 
   const shortLink = new ShortLink({
