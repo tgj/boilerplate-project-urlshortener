@@ -13,20 +13,30 @@ exports.shortLink_create_post = asyncHandler(async (req, res, next) => {
     return res.json({ error: "invalid url" });
   }
 
-  const shortLink = new ShortLink({
-    originalLink: req.body.url,
-  });
-  console.log(shortLink);
-  shortLink
-    .save()
+  const sanitizedLink = req.body.url.replace(/\/$/, "");
+  ShortLink.findOne({ originalLink: sanitizedLink })
     .then((doc) => {
-      console.log("ShortLink saved: " + doc);
+      console.log("ShortLink exists, sending id: ");
       res.json({
         short_url: doc.numberId,
         original_url: doc.originalLink,
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const shortLink = new ShortLink({
+        originalLink: sanitizedLink,
+      });
+      shortLink
+        .save()
+        .then((doc) => {
+          console.log("ShortLink saved: " + doc);
+          res.json({
+            short_url: doc.numberId,
+            original_url: doc.originalLink,
+          });
+        })
+        .catch((err) => console.log(err));
+    });
 });
 
 exports.shortLink_get = asyncHandler(async (req, res, next) => {

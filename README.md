@@ -4,6 +4,6 @@ This is the boilerplate code for the URL Shortener Microservice project. Instruc
 
 [Demo](https://boilerplate-project-urlshortener-o8ah.onrender.com/)
 
-## Enhancements (TODO)
+## Enhancements
 
 - As a user, I want to be able to specify the same url and get back the same short_url
